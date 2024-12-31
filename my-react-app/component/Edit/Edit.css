@@ -1,0 +1,344 @@
+/* EDIT PROFILE */
+.box-edit-profile {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  margin: 0 auto 20px; /* Perbaiki margin agar rapi */
+}
+
+.box-edit-profile h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.box-edit-profile2,
+.box-edit-profile div {
+  margin-bottom: 15px;
+}
+
+.box-edit-profile label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.box-edit-profile input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.box-edit-profile button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.box-edit-profile button:hover {
+  background: #0056b3;
+}
+
+.btn-secondary {
+  background: #6c757d;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .box-edit-profile {
+    padding: 15px;
+  }
+
+  .box-edit-profile h2 {
+    font-size: 20px;
+  }
+
+  .box-edit-profile input {
+    font-size: 14px;
+  }
+
+  .box-edit-profile button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .box-edit-profile {
+    padding: 10px;
+  }
+
+  .box-edit-profile h2 {
+    font-size: 18px;
+  }
+
+  .box-edit-profile input {
+    font-size: 12px;
+  }
+
+  .box-edit-profile button {
+    font-size: 12px;
+  }
+}
+
+/* EDIT ADDRESS */
+.box-edit-alamat {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  margin: 0 auto 20px;
+}
+
+.box-edit-alamat h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #444;
+}
+
+.box-edit-alamat form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.box-edit-alamat label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.box-edit-alamat input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.box-edit-alamat button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.box-edit-alamat button:hover {
+  background: #007bff;
+}
+/* Responsive design for Edit Address */
+@media (max-width: 768px) {
+  .box-edit-alamat {
+    padding: 15px;
+  }
+
+  .box-edit-alamat h2 {
+    font-size: 20px;
+  }
+
+  .box-edit-alamat input {
+    font-size: 14px;
+  }
+
+  .box-edit-alamat button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .box-edit-alamat {
+    padding: 10px;
+  }
+
+  .box-edit-alamat h2 {
+    font-size: 18px;
+  }
+
+  .box-edit-alamat input {
+    font-size: 12px;
+  }
+
+  .box-edit-alamat button {
+    font-size: 12px;
+  }
+}
+
+/* Custom button styles */
+.btn-blue {
+  background-color: #007bff; /* Biru */
+  color: white;
+  border: none;
+}
+
+.btn-blue:hover {
+  background-color: #0056b3; /* Biru lebih gelap */
+  color: white;
+}
+
+/* Custom dropdown styles */
+.custom-dropdown .dropdown-toggle {
+  background-color: #007bff; /* Biru */
+  color: white;
+  border: none;
+}
+
+.custom-dropdown .dropdown-menu {
+  border: 1px solid #007bff; /* Garis biru */
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #0056b3; /* Biru lebih gelap */
+  color: white;
+}
+
+/* CONTAINER FOR BOTH COMPONENTS */
+.container-edit {
+  display: flex;
+  flex-wrap: wrap; /* Untuk mendukung tampilan pada layar yang lebih kecil */
+  gap: 20px;
+  padding: 20px;
+  justify-content: center; /* Agar elemen ditata rapi di tengah */
+}
+
+.box-edit-profile,
+.box-edit-alamat {
+  flex: 1 1 45%; /* Lebar elemen fleksibel dan memiliki minimum 45% */
+  max-width: 600px; /* Maksimal lebar 600px */
+}
+
+@media (max-width: 768px) {
+  .box-edit-profile,
+  .box-edit-alamat {
+    flex: 1 1 100%; /* Lebar penuh pada layar yang lebih kecil */
+  }
+}
+
+/* Minimal CSS reset */
+
+.edit-password-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  margin: 20px auto;
+}
+
+.edit-password-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #444;
+}
+
+.edit-password-container .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-password-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.edit-password-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.edit-password-container .btn-submit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.edit-password-container .btn-submit:hover {
+  background: #0056b3;
+}
+
+.edit-password-container .error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.edit-password-container .success-message {
+  color: green;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .edit-password-container {
+    padding: 15px;
+  }
+
+  .edit-password-container h2 {
+    font-size: 20px;
+  }
+
+  .edit-password-container input {
+    font-size: 14px;
+  }
+
+  .edit-password-container .btn-submit {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-password-container {
+    padding: 10px;
+  }
+
+  .edit-password-container h2 {
+    font-size: 18px;
+  }
+
+  .edit-password-container input {
+    font-size: 12px;
+  }
+
+  .edit-password-container .btn-submit {
+    font-size: 12px;
+  }
+}

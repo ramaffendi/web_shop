@@ -1,0 +1,61 @@
+/* Container utama */
+.box-content-invoice {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+/* Heading utama */
+.box-content-invoice h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-list {
+  list-style-type: none; /* Menghilangkan titik */
+  padding-left: 0; /* Menghilangkan padding default pada ul */
+  margin-left: 0; /* Menggeser lebih ke kiri */
+}
+
+.custom-list li {
+  margin-bottom: 5px; /* Memberikan jarak antar item */
+}
+
+/* Informasi umum */
+
+/* Heading untuk daftar items */
+.box-content-invoice h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 30px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* Responsif untuk perangkat kecil */
+@media (max-width: 768px) {
+  .box-content-invoice {
+    padding: 15px;
+  }
+
+  .box-content-invoice h1 {
+    font-size: 24px;
+  }
+
+  .box-content-invoice p {
+    font-size: 14px;
+  }
+
+  .box-content-invoice h3 {
+    font-size: 18px;
+  }
+}

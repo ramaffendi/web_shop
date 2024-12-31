@@ -1,0 +1,50 @@
+/* Styling untuk box yang membungkus tag */
+.box-tags {
+  padding: 10px;
+  font-family: cursive;
+}
+.box-tags p {
+  margin-bottom: 10px; /* Memberi jarak antara teks dan garis */
+}
+
+.box-tags hr {
+  border: none; /* Menghapus border default */
+  border-top: 2px solid #000; /* Menambahkan garis atas, ganti warna sesuai kebutuhan */
+  margin-top: 0; /* Menyesuaikan jarak antara garis dan elemen sebelumnya */
+}
+/* Styling untuk daftar tag */
+.tag-list {
+  list-style: none; /* Menghapus bullet default dari ul */
+  padding: 0;
+  margin: 0;
+}
+
+/* Styling untuk item tag */
+.tag-item {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 10px;
+  border-radius: 15px;
+  background-color: #e0e0e0;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #333;
+  cursor: pointer;
+}
+
+.tag-item::before {
+  content: "•";
+  margin-right: 8px;
+  font-size: 18px;
+  color: #333;
+}
+
+.tag-item.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.tag-item:hover {
+  background-color: #007bff;
+  color: white;
+}

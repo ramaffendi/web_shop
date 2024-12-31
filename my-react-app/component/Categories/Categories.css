@@ -1,0 +1,48 @@
+/* Gaya untuk box-category */
+.box-category {
+  margin-bottom: 20px;
+  text-align: left; /* Konten rata kiri */
+}
+
+.box-category h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Gaya untuk btn-category */
+.btn-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.btn-category li {
+  margin: 10px 0; /* Jarak antar item */
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+.btn-category li:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Active state */
+.btn-category li.active {
+  background-color: #007bff; /* Warna saat aktif */
+  color: white; /* Warna teks saat aktif */
+  font-weight: bold; /* Menonjolkan teks */
+  transform: scale(1.1); /* Sedikit lebih besar saat aktif */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Bayangan lebih menonjol */
+}
