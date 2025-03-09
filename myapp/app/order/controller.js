@@ -6,19 +6,20 @@ const CartItem = require("../../cart-item/model");
 
 const store = async (req, res, next) => {
   try {
-    console.log("User:", req.user);
-    console.log("Request Body:", req.body);
+    // console.log("User:", req.user);
+    // console.log("Request Body:", req.body);
 
     let { delivery_fee, delivery_address, payment_method, bank_details } =
       req.body;
     let items = await CartItem.find({ user: req.user._id }).populate("product");
+    console.log("itemssssssss00", items);
     if (!items) {
       return res.json({
         error: 1,
         message: "kamu tidak bisa membuat order karena tidak memiliki item",
       });
     }
-    console.log("halllllooooooo2222222", bank_details);
+    // console.log("halllllooooooo2222222", bank_details);
     let address = await DeliveryAddress.findById(delivery_address);
     if (!address) {
       return res.status(400).json({
@@ -26,7 +27,7 @@ const store = async (req, res, next) => {
         message: "Alamat tidak ditemukan",
       });
     }
-    console.log("Delivery Address:", address);
+    // console.log("Delivery Address:", address);
 
     let order = new Order({
       _id: new Types.ObjectId(),
@@ -72,8 +73,8 @@ const store = async (req, res, next) => {
 
 const index = async (req, res, next) => {
   try {
-    console.log("User:", req.user);
-    console.log("Request Body:", req.body);
+    // console.log("User:", req.user);
+    // console.log("Request Body:", req.body);
 
     let { skip = 0, limit = 10 } = req.query;
     let count = await Order.find({ user: req.user._id }).countDocuments();

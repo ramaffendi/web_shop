@@ -15,20 +15,3 @@
   width: 20%; /* Lebar bagian kategori */
   background-color: #ffffff; /* Tambahkan warna latar */
 }
-
-.product-menu {
-  flex: 1; /* Bagian produk mengambil sisa ruang */
-  padding: 10px; /* Jarak dalam elemen */
-  background-color: #ffffff; /* Tambahkan warna latar */
-  border-radius: 8px; /* Sudut membulat */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan ringan */
-}
-
-/* Responsif untuk layar kecil */
-@media screen and (max-width: 768px) {
-  .content-container,
-  .product-menu {
-    width: 100%; /* Lebar penuh untuk layar kecil */
-    margin-bottom: 20px; /* Tambahkan jarak bawah */
-  }
-}

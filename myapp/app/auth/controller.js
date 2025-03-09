@@ -38,7 +38,7 @@ const localStrategy = async (email, password, done) => {
     if (!bcrypt.compareSync(password, user.password)) {
       return done(null, false); // Password salah
     }
-    ({ password, ...userWithoutPassword } = user.toJSON()); // agar password tidak ikut terkirim ke API client
+    ({ password, ...userWithoutPassword } = user.toJSON());
     return done(null, userWithoutPassword);
   } catch (err) {
     done(err, null);

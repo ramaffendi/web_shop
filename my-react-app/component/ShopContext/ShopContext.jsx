@@ -18,9 +18,12 @@ export const CartProvider = ({ children }) => {
       if (!token) return;
 
       try {
-        const response = await axios.get("http://localhost:8080/api/carts", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `${import.meta.env.REACT_APP_API_URL}/api/carts`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setCartItems(response.data);
       } catch (error) {
         console.error("Error fetching cart items:", error);
@@ -49,7 +52,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/carts",
+        `${import.meta.env.REACT_APP_API_URL}/api/carts`,
         { name, qty, product: productId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -91,9 +94,14 @@ export const CartProvider = ({ children }) => {
           // Jika kuantitas item <= 0, hapus item dari keranjang
           if (updatedQty <= 0) {
             axios
-              .delete(`http://localhost:8080/api/carts/${existingItem._id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-              })
+              .delete(
+                `${import.meta.env.REACT_APP_API_URL}/api/carts/${
+                  existingItem._id
+                }`,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              )
               .catch((error) => {
                 console.error(
                   "Error deleting from cart:",
@@ -115,7 +123,7 @@ export const CartProvider = ({ children }) => {
         cartItems.find((item) => item.product === productId).qty + qty;
       if (updatedQty > 0) {
         await axios.post(
-          "http://localhost:8080/api/carts",
+          `${import.meta.env.REACT_APP_API_URL}/api/carts`,
           { name, qty, product: productId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -144,7 +152,9 @@ export const CartProvider = ({ children }) => {
 
         if (newQty === 0) {
           await axios.delete(
-            `http://localhost:8080/api/carts/${existingItem._id}`,
+            `${import.meta.env.REACT_APP_API_URL}/api/carts/${
+              existingItem._id
+            }`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
           setCartItems((prev) =>
@@ -152,7 +162,9 @@ export const CartProvider = ({ children }) => {
           );
         } else {
           await axios.put(
-            `http://localhost:8080/api/carts/${existingItem._id}`,
+            `${import.meta.env.REACT_APP_API_URL}/api/carts/${
+              existingItem._id
+            }`,
             { qty: newQty },
             { headers: { Authorization: `Bearer ${token}` } }
           );

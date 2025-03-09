@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../ShopContext/UseCartContext";
 import axios from "axios";
 import "./Cart.css";
+import swal from "sweetalert";
 
 const Cart = () => {
   const {
@@ -28,9 +29,12 @@ const Cart = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:8080/api/carts", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `${import.meta.env.REACT_APP_API_URL}/api/carts`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         console.log("Cart items berhasil:", response.data);
         setCartItems(response.data); // Menyimpan data dari backend ke state
       } catch (error) {
@@ -50,8 +54,10 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (Object.keys(cartItems).length === 0) {
-      alert(
-        "Keranjang Anda kosong! Silakan tambahkan item sebelum melanjutkan ke checkout."
+      swal(
+        "",
+        "Keranjang Anda kosong! Silakan tambahkan item sebelum melanjutkan ke checkout.",
+        "error"
       );
       return;
     }
@@ -83,7 +89,9 @@ const Cart = () => {
                 <div key={id} className="cart-item">
                   {cartItem.image_url && (
                     <img
-                      src={`http://localhost:8080/images/products/${cartItem.image_url}`}
+                      src={`${
+                        import.meta.env.REACT_APP_API_URL
+                      }/images/products/${cartItem.image_url}`}
                       alt={cartItem.name}
                     />
                   )}

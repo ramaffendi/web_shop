@@ -5,6 +5,7 @@ import "./Edit.css";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import EditAddress from "./EditAlamat";
+import swal from "sweetalert";
 
 const EditProfile = () => {
   const [user, setUser] = useState({}); // Pastikan user memiliki properti _id
@@ -16,11 +17,14 @@ const EditProfile = () => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`http://localhost:8080/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.REACT_APP_API_URL}/auth/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (response.data) {
           setUser(response.data); // Pastikan response.data memiliki properti _id
         }
@@ -48,7 +52,7 @@ const EditProfile = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:8080/auth/updateProfile/${user._id}`, // Sertakan ID di URL
+        `${import.meta.env.REACT_APP_API_URL}/auth/updateProfile/${user._id}`, // Sertakan ID di URL
         user,
         {
           headers: {
@@ -56,7 +60,7 @@ const EditProfile = () => {
           },
         }
       );
-      alert("Profil berhasil diperbarui");
+      swal("Good job!", "Profil sudah diperbarui", "success");
       navigate(`/me`);
     } catch (err) {
       console.error("Kesalahan saat memperbarui data pengguna:", err);
@@ -89,8 +93,8 @@ const EditProfile = () => {
               <label>Nama Lengkap:</label>
               <input
                 type="text"
-                name="full_name"
-                value={user.full_name || ""}
+                name="name"
+                value={user.name || ""}
                 onChange={handleChange}
               />
             </div>

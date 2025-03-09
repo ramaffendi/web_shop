@@ -12,7 +12,7 @@ const show = async (req, res, next) => {
       });
     }
     // Debugging log
-    console.log("Received Order ID:", order_id);
+    // console.log("Received Order ID:", order_id);
 
     // Cari invoice berdasarkan `order_id`
     let invoice = await Invoice.findOne({ order: order_id })
@@ -20,7 +20,7 @@ const show = async (req, res, next) => {
       .populate("user");
 
     // Debugging log untuk memastikan `invoice` ditemukan atau tidak
-    console.log("Fetched Invoice:", invoice);
+    // console.log("Fetched Invoice:", invoice);
 
     // Jika invoice tidak ditemukan
     if (!invoice) {

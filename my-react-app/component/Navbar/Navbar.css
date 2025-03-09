@@ -1,0 +1,49 @@
+/* Pastikan dropdown tetap dalam satu baris */
+#user-dropdown .dropdown-menu {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px; /* Jarak antar item */
+  padding: 10px;
+  min-width: max-content; /* Mencegah dropdown menyempit */
+  white-space: nowrap;
+}
+
+/* Atur tampilan dropdown item */
+#user-dropdown .dropdown-item {
+  padding: 8px 12px;
+  text-align: center;
+}
+
+/* Pastikan navbar sejajar */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Menyesuaikan menu agar sejajar di layar besar */
+@media (min-width: 992px) {
+  .navbar-nav {
+    flex-direction: row;
+    gap: 20px; /* Jarak antar menu */
+  }
+
+  .nav-item {
+    display: inline-block;
+  }
+}
+
+.active-nav {
+  position: relative;
+  font-weight: bold;
+}
+
+.active-nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background-color: #007bff;
+  transition: width 0.3s ease-in-out;
+}

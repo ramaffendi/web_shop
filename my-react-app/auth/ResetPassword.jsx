@@ -26,7 +26,7 @@ const ResetPassword = () => {
       await schema.validate({ password });
 
       const response = await Axios.post(
-        `http://localhost:8080/auth/reset-password/${token}`,
+        `${import.meta.env.REACT_APP_API_URL}/auth/reset-password/${token}`,
         {
           password: password,
         },

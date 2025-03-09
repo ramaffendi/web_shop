@@ -7,17 +7,24 @@ import {
   Button,
   Badge,
 } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useCart } from "../../component/ShopContext/UseCartContext"; // Context untuk keranjang
 import logo from "../../src/assets/logo.png";
 import cart_icon from "../../src/assets/cart_icon.png";
+import "./Navbar.css";
 
 const CustomNavbar = () => {
   const { totalItems, setCartItems } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState(location.pathname);
+
+  useEffect(() => {
+    setActiveLink(location.pathname);
+  }, [location]);
 
   // Fetch profil user
   useEffect(() => {
@@ -28,9 +35,13 @@ const CustomNavbar = () => {
         return;
       }
       try {
-        const response = await axios.get("http://localhost:8080/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `${import.meta.env.REACT_APP_API_URL}/auth/me`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: true,
+          }
+        );
         setUser(response.data);
         setIsLoggedIn(true);
       } catch (error) {
@@ -50,9 +61,12 @@ const CustomNavbar = () => {
         return;
       }
       try {
-        const response = await axios.get("http://localhost:8080/api/carts", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `${import.meta.env.REACT_APP_API_URL}/api/carts`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setCartItems(response.data);
       } catch (error) {
         console.error("Error fetching cart data:", error);
@@ -98,13 +112,25 @@ const CustomNavbar = () => {
         <Navbar.Collapse id="navbar-nav">
           {/* Links di tengah */}
           <Nav className="mx-auto d-flex justify-content-center align-items-center">
-            <Nav.Link as={Link} to="/home">
+            <Nav.Link
+              as={Link}
+              to="/home"
+              className={activeLink === "/home" ? "active-nav" : ""}
+            >
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link
+              as={Link}
+              to="/"
+              className={activeLink === "/" ? "active-nav" : ""}
+            >
               Menu
             </Nav.Link>
-            <Nav.Link as={Link} to="/contact-us">
+            <Nav.Link
+              as={Link}
+              to="/contact-us"
+              className={activeLink === "/contact-us" ? "active-nav" : ""}
+            >
               Contact Us
             </Nav.Link>
           </Nav>
@@ -113,7 +139,7 @@ const CustomNavbar = () => {
           <Nav className="align-items-center">
             {isLoggedIn ? (
               <NavDropdown
-                title={`Hello, ${user.full_name || "User"}`}
+                title={`Hello, ${user.name || "User"}`}
                 id="user-dropdown"
               >
                 <NavDropdown.Item as={Link} to="/me">

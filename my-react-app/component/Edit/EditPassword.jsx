@@ -51,7 +51,7 @@ const EditPassword = () => {
 
       // Kirim request untuk mengubah password
       await axios.put(
-        `http://localhost:8080/auth/updatePassword/${id}`, // Menggunakan ID dari URL
+        `${import.meta.env.REACT_APP_API_URL}/auth/updatePassword/${id}`, // Menggunakan ID dari URL
         { oldPassword, newPassword },
         {
           headers: {

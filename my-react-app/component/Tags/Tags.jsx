@@ -11,7 +11,9 @@ const Tags = ({ onTagClick, selectedCategory }) => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/tags");
+        const response = await axios.get(
+          `${import.meta.env.REACT_APP_API_URL}/api/tags`
+        );
 
         if (Array.isArray(response.data)) {
           setTags(response.data);

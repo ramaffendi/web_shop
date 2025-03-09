@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
-const { dbHost, dbName, dbPort } = require("../app/config.js");
+const { mongoURI } = require("../app/config.js"); // Import mongoURI dari config.js
+
+if (!mongoURI) {
+  console.error("MONGO_URI is not defined in .env file!");
+  process.exit(1);
+}
 
 mongoose
-  .connect(`mongodb://${dbHost}:${dbPort}/${dbName}`)
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Database connected successfully"))
   .catch((error) => console.error("Database connection error:", error));
 

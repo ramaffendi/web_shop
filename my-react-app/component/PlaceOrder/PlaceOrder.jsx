@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PlaceOrder.css";
 import bankDetails from "../../src/data/pembayaran";
+import swal from "sweetalert";
+import Swal from "sweetalert2";
+import { DotLottieWorkerReact } from "@lottiefiles/dotlottie-react";
 
+import ReactDOM from "react-dom";
 const PlaceOrder = () => {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
@@ -33,7 +37,7 @@ const PlaceOrder = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:8080/api/delivery-addresses",
+          `${import.meta.env.REACT_APP_API_URL}/api/delivery-addresses`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -80,12 +84,12 @@ const PlaceOrder = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedAddress) {
-      alert("Alamat belum dipilih");
+      swal("Alamat belum dipilih");
       return;
     }
 
     if (!selectedPayment) {
-      alert("Metode pembayaran belum dipilih");
+      swal("Metode pembayaran belum dipilih");
       return;
     }
 
@@ -94,7 +98,7 @@ const PlaceOrder = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:8080/api/orders",
+        `${import.meta.env.REACT_APP_API_URL}/api/orders`,
         {
           delivery_fee: deliveryFee,
           delivery_address: selectedAddress,
@@ -110,19 +114,44 @@ const PlaceOrder = () => {
       );
       const orderId = response.data._id;
       if (!orderId) {
-        alert("Terjadi kesalahan, ID pesanan tidak ditemukan.");
+        swal("Terjadi kesalahan, ID pesanan tidak ditemukan.");
         return;
       }
-      console.log("haalllooo", response.data);
 
       localStorage.removeItem("cartItems");
+
+      // Menampilkan SweetAlert2 dengan animasi Lottie
+      Swal.fire({
+        title: "Pembelian Berhasil!",
+        html: `
+        <div style="text-align: center;">
+          <div id="lottie-container" style="width: 150px; height: 150px; margin: auto;"></div>
+          <p>Pesanan Anda telah diproses dengan sukses!</p>
+        </div>
+      `,
+        didOpen: () => {
+          // Render DotLottie inside the Swal modal
+          const container = document.getElementById("lottie-container");
+          ReactDOM.createRoot(container).render(
+            <DotLottieWorkerReact
+              src="https://lottie.host/336b57a1-ffd2-4dc6-a508-7f8f86b9557c/nMpchfJ7Th.lottie"
+              loop
+              autoplay
+              style={{ width: "100%", height: "100%" }}
+            />
+          );
+        },
+        confirmButtonText: "OK",
+      });
+
+      // Redirect ke halaman invoice
       navigate(`/invoice/${orderId}`);
     } catch (error) {
       console.error(
         "Error placing order:",
         error.response ? error.response.data : error.message
       );
-      alert("Terjadi kesalahan saat memproses pesanan. Silakan coba lagi.");
+      swal("Terjadi kesalahan saat memproses pesanan. Silakan coba lagi.");
     }
   };
 
@@ -148,7 +177,18 @@ const PlaceOrder = () => {
           <div className="bank-details">
             <h4>Detail Pembayaran:</h4>
             <p>
-              <strong>Nama Bank:</strong> {paymentDetails.details.bank_name}
+              <strong>Bank:</strong> {paymentDetails.details.bank_name}
+              <img
+                src={paymentDetails.details.logo}
+                alt={paymentDetails.details.bank_name}
+                width="80"
+                height="35"
+                style={{
+                  marginLeft: "29px",
+                  borderRadius: "5px",
+                  paddingBottom: "5px",
+                }}
+              />
             </p>
             <p>
               <strong>No. Rekening:</strong>{" "}

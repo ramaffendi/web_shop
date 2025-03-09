@@ -7,7 +7,7 @@ import { useCart } from "../ShopContext/UseCartContext";
 const ProductMenu = ({ selectedCategory, selectedTag, skip = 0, setSkip }) => {
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState();
-  const limit = 10;
+  const limit = 8;
   const [loading, setLoading] = useState(false);
 
   // Mengambil cartItems dan fungsi dari useCart
@@ -16,9 +16,17 @@ const ProductMenu = ({ selectedCategory, selectedTag, skip = 0, setSkip }) => {
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/products`, {
-        params: { skip, limit, category: selectedCategory, tags: selectedTag },
-      });
+      const response = await axios.get(
+        `${import.meta.env.REACT_APP_API_URL}/api/products`,
+        {
+          params: {
+            skip,
+            limit,
+            category: selectedCategory,
+            tags: selectedTag,
+          },
+        }
+      );
       setProducts(response.data.data);
       setTotalProducts(response.data.count);
     } catch (error) {
@@ -46,7 +54,9 @@ const ProductMenu = ({ selectedCategory, selectedTag, skip = 0, setSkip }) => {
                   <h2 className="name-h2">{product.name}</h2>
                   {product.image_url && (
                     <img
-                      src={`http://localhost:8080/images/products/${product.image_url}`}
+                      src={`${
+                        import.meta.env.REACT_APP_API_URL
+                      }/images/products/${product.image_url}`}
                       alt={product.name}
                       width="200"
                     />

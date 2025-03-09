@@ -22,7 +22,7 @@ const Invoice = () => {
 
         // Menggunakan order_id pada URL endpoint
         const response = await axios.get(
-          `http://localhost:8080/api/invoices/${order_id}`,
+          `${import.meta.env.REACT_APP_API_URL}/api/invoices/${order_id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         console.log(response.data);
@@ -51,7 +51,7 @@ const Invoice = () => {
         <h1>Invoice: {invoice._id}</h1>
         <p>
           <strong>Nama Lengkap : </strong>
-          {invoice.user?.full_name || "N/A"}
+          {invoice.user?.name || "N/A"}
         </p>
         <p>
           <strong>Pengiriman : </strong>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Edit.css";
 import Dropdown from "react-bootstrap/Dropdown";
-
+import swal from "sweetalert";
 const EditAddress = () => {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -20,7 +20,7 @@ const EditAddress = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:8080/api/delivery-addresses",
+          `${import.meta.env.REACT_APP_API_URL}/api/delivery-addresses`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ const EditAddress = () => {
         setAddresses(response.data.data);
       } catch (error) {
         console.error("Error fetching addresses:", error);
-        alert("Gagal memuat daftar alamat.");
+        swal("Gagal memuat daftar alamat.");
       }
     };
 
@@ -60,14 +60,16 @@ const EditAddress = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedAddress) {
-      alert("Pilih alamat untuk diedit.");
+      swal("Pilih alamat untuk diedit.");
       return;
     }
 
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:8080/api/delivery-addresses/${selectedAddress._id}`,
+        `${import.meta.env.REACT_APP_API_URL}/api/delivery-addresses/${
+          selectedAddress._id
+        }`,
         formData,
         {
           headers: {
@@ -76,23 +78,25 @@ const EditAddress = () => {
         }
       );
 
-      alert("Alamat berhasil diperbarui.");
+      swal("Good job!", "Alamat sudah diperbarui", "success");
     } catch (error) {
       console.error("Error updating address:", error);
-      alert("Terjadi kesalahan saat memperbarui alamat.");
+      swal("Terjadi kesalahan saat memperbarui alamat.");
     }
   };
 
   const handleDelete = async () => {
     if (!selectedAddress) {
-      alert("Pilih alamat yang ingin dihapus.");
+      swal("Pilih alamat yang ingin dihapus.");
       return;
     }
 
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:8080/api/delivery-addresses/${selectedAddress._id}`,
+        `${import.meta.env.REACT_APP_API_URL}/api/delivery-addresses/${
+          selectedAddress._id
+        }`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,7 +104,7 @@ const EditAddress = () => {
         }
       );
 
-      alert("Alamat berhasil dihapus.");
+      swal("Good job!", "Alamat sudah dihapus", "success");
       setAddresses((prevAddresses) =>
         prevAddresses.filter((addr) => addr._id !== selectedAddress._id)
       );
@@ -115,7 +119,7 @@ const EditAddress = () => {
       });
     } catch (error) {
       console.error("Error deleting address:", error);
-      alert("Terjadi kesalahan saat menghapus alamat.");
+      swal("Terjadi kesalahan saat menghapus alamat.");
     }
   };
 

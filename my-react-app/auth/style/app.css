@@ -165,24 +165,53 @@ input {
 
 /* STYLE Me */
 
-/* Profil Page */ /* Profile Page Container */
+/* Profile Page Container */
 .profile-page {
-  max-width: 1200px;
+  max-width: 700px;
   margin: 2rem auto;
   padding: 0 1.5rem;
+}
+
+/* Tab Buttons Container */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.tab-buttons button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  border: none;
+}
+
+.tab-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.15);
+}
+
+/* Tab Content Container */
+.tab-content {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 2rem;
 }
 
 /* Profile Section */
-.profile-page > div:first-child {
+.profile-content {
   background-color: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  grid-column: 1 / -1;
 }
 
+/* Profile Section */
 .profile-page h2 {
   font-size: 1.75rem;
   color: #2d3748;
@@ -247,6 +276,7 @@ input {
 .btn-primary {
   background-color: #4299e1;
   border: none;
+  color: white;
 }
 
 .btn-primary:hover {
@@ -257,6 +287,7 @@ input {
 .btn-secondary {
   background-color: #718096;
   border: none;
+  color: white;
 }
 
 .btn-secondary:hover {
@@ -270,6 +301,7 @@ input {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  grid-column: 1 / -1;
 }
 
 .order-box h3 {
@@ -315,23 +347,48 @@ input {
   border-bottom: none;
 }
 
+/* Animation for tab switching */
+.profile-content,
+.order-box {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .profile-page {
+  .tab-content {
     gap: 1.5rem;
+  }
+
+  .profile-page {
     padding: 0 1rem;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-page {
+  .tab-content {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .profile-page > div:first-child,
+  .profile-content,
   .order-box {
     padding: 1.5rem;
+  }
+
+  .tab-buttons button {
+    min-width: 100px;
+    padding: 0.75rem 1.5rem;
   }
 }
 
@@ -341,9 +398,18 @@ input {
     padding: 0 0.75rem;
   }
 
-  .profile-page > div:first-child,
+  .profile-content,
   .order-box {
     padding: 1rem;
+  }
+
+  .tab-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tab-buttons button {
+    width: 100%;
   }
 
   .btn {
@@ -462,4 +528,17 @@ input {
   .items-orders-list span {
     font-size: 14px;
   }
+}
+
+.google-sign-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem; /* Setara dengan mt-8 di Tailwind */
+}
+
+.google-sign-title {
+  font-size: 1.5rem; /* Setara dengan text-2xl di Tailwind */
+  font-weight: bold;
+  color: #60a5fa; /* Setara dengan text-blue-300 di Tailwind */
 }

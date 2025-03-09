@@ -31,13 +31,13 @@ const Footer = () => {
         <div className="footer-content-right">
           <h3>GET IN TOUCH</h3>
           <ul>
-            <li>+62-898-2234-1233</li>
+            <li>+62-898-3417-046</li>
             <li>contact@gmail.com</li>
           </ul>
         </div>
       </div>
       <p className="footer-copyright">
-        Copyright 2024 &copy; Created By: Ramadhanefeendi98@gmail.com - All
+        Copyright 2024 &copy; Created By: ramadhaneffendi98@gmail.com - All
         Right Reserved
       </p>
     </div>

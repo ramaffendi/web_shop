@@ -2,9 +2,9 @@ import { useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-
+import swal from "sweetalert";
 const Signup = () => {
-  const [full_name, setFullName] = useState("");
+  const [name, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -12,7 +12,7 @@ const Signup = () => {
 
   // Schema validasi menggunakan yup
   const schema = yup.object().shape({
-    full_name: yup
+    name: yup
       .string()
       .matches(/^\S*$/, "Full Name tidak boleh mengandung spasi")
       .required("Full Name wajib diisi"),
@@ -30,35 +30,41 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("➡️ Mencoba signup dengan data:", { name, email, password }); // ✅ Debugging data sebelum dikirim
+
     try {
       // Validasi input menggunakan schema yup
-      await schema.validate({ full_name, email, password });
+      await schema.validate({ name, email, password });
+      console.log("✅ Data validasi yup berhasil");
 
       const response = await Axios.post(
-        "http://localhost:8080/auth/signup",
+        `${import.meta.env.REACT_APP_API_URL}/auth/signup`,
         {
-          full_name,
+          name,
           email,
           password,
         },
         {
+          headers: { "Content-Type": "application/json" }, // ✅ Pastikan header dikirim
           withCredentials: true,
         }
       );
 
+      console.log("✅ Response dari backend:", response); // ✅ Debugging response dari backend
+
       if (response.status === 201) {
-        console.log(response.data);
-        alert("Pendaftaran berhasil, silakan login");
+        swal("Good job", "Pendaftaran berhasil, silakan login", "success");
         navigate("/login");
       }
     } catch (error) {
       if (error.name === "ValidationError") {
-        // Menampilkan pesan kesalahan dari yup
+        console.error("❌ Error Validasi Yup:", error.errors[0]); // ✅ Debugging error validasi
         setErrorMessage(error.errors[0]);
-      } else if (error.response && error.response.data) {
-        // Menampilkan pesan kesalahan dari backend
+      } else if (error.response) {
+        console.error("❌ Error response dari backend:", error.response.data); // ✅ Debugging error dari backend
         setErrorMessage(error.response.data.message || "Terjadi kesalahan");
       } else {
+        console.error("❌ Kesalahan lainnya:", error.message); // ✅ Debugging error lainnya
         setErrorMessage("Terjadi kesalahan");
       }
     }
@@ -69,11 +75,11 @@ const Signup = () => {
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <h2>Signup</h2>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <label htmlFor="full_name">Full Name:</label>
+        <label htmlFor="name">Full Name:</label>
         <input
           type="text"
           placeholder="Full Name"
-          value={full_name}
+          value={name}
           onChange={(e) => setFullName(e.target.value)}
           required
         />

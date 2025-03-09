@@ -1,36 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style/app.css";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+// import GoogleLoginButton from "./GoogleSign";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  // **1️⃣ Tangkap token dari URL setelah login Google**
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    console.log("Token dari URL:", token); // Debug token
+
+    if (token) {
+      localStorage.setItem("token", token);
+      console.log("Token berhasil disimpan di localStorage:", token);
+      navigate("/home"); // Redirect ke halaman home setelah login sukses
+    }
+  }, [navigate]);
+
+  // **2️⃣ Login Manual (Email & Password)**
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Kirim permintaan login
-    Axios.post(
-      "http://localhost:8080/auth/login",
-      { email, password },
-      {
-        withCredentials: true, // Pastikan credentials ikut dikirim
-      }
-    )
+    Axios.post(`${import.meta.env.REACT_APP_API_URL}/auth/login`, {
+      email,
+      password,
+    })
       .then((response) => {
         if (response.data.status) {
-          // Simpan token di localStorage
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("_id", response.data.user._id);
-
-          // Navigasi ke halaman utama setelah login sukses
+          console.log("Token saved:", localStorage.getItem("token"));
           navigate("/home");
         }
       })
       .catch((err) => {
-        // Menangani error saat login
         console.error("Error during login:", err);
         alert(
           "Login gagal: " +
@@ -69,6 +78,7 @@ const Login = () => {
         <label>
           Do not have an account? <Link to="/signup">Signup</Link>
         </label>
+        {/* <GoogleLoginButton /> */}
       </form>
     </div>
   );

@@ -12,7 +12,9 @@ const CategoryMenu = ({ onSelectCategory, resetCategory }) => {
   // Fetch categories from API
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/categories");
+      const response = await axios.get(
+        `${import.meta.env.REACT_APP_API_URL}/api/categories`
+      );
       console.log("Fetched categories:", response.data);
 
       if (Array.isArray(response.data)) {
