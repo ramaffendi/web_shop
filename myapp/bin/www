@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require("../app.js");
+var app = require("../server.js");
 var debug = require("debug")("myapp:server");
 var http = require("http");
 const db = require("../databases/index.js");
